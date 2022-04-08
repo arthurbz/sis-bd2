@@ -24,6 +24,8 @@
         $titulo = 'titulo';
         $autor = 'autor';
         $classificacao = 'classificacao';
+        $paginas = 'paginas';
+        $data_publicacao = 'data_publicacao';
         /*TODO-1: Adicione uma variavel para cada coluna */
 
 
@@ -31,9 +33,10 @@
             'SELECT ' . $titulo .
             '     , ' . $autor .
             '     , ' . $classificacao .
+            '     , ' . $paginas.
+            '     , ' . $data_publicacao.
             /*TODO-2: Adicione cada variavel a consulta abaixo */
             '  FROM livros';
-
 
         $resultado = mysqli_query($conexao, $sql);
         if (!$resultado) {
@@ -42,13 +45,15 @@
 
 
 
+        /* TODO-3: Adicione as variaveis ao cabeçalho da tabela */
         $cabecalho =
             '<table>' .
             '    <tr>' .
             '        <th>' . $titulo . '</th>' .
             '        <th>' . $autor . '</th>' .
-            /* TODO-3: Adicione as variaveis ao cabeçalho da tabela */
             '        <th>' . $classificacao . '</th>' .
+            '        <th>' . $paginas . '</th>' .
+            '        <th>' . $data_publicacao. '</th>' .
             '    </tr>';
 
         echo $cabecalho;
@@ -57,16 +62,17 @@
 
             while ($registro = mysqli_fetch_assoc($resultado)) {
                 echo '<tr>';
-
+                    /* TODO-4: Adicione a tabela os novos registros. */
                 echo '<td>' . $registro[$titulo] . '</td>' .
                     '<td>' . $registro[$autor] . '</td>' .
-                    /* TODO-4: Adicione a tabela os novos registros. */
-                    '<td>' . $registro[$classificacao] . '</td>';
+                    '<td>' . $registro[$classificacao] . '</td>' .
+                    '<td>' . $registro[$paginas] . '</td>' .
+                    '<td>' . $registro[$data_publicacao] . '</td>';
                 echo '</tr>';
             }
             echo '</table>';
         } else {
-            echo '';
+            echo 'Sem dados!';
         }
         FecharConexao($conexao);
         ?>
