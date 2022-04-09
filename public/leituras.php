@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <head>
@@ -15,28 +14,31 @@
     <div class="content">
         <h1>Bibliófilo's</h1>
 
-        <h2>Livros</h2>
+        <h2>Leituras</h2>
         <?php
         require 'mysql_server.php';
 
         $conexao = RetornaConexao();
 
-        $titulo = 'titulo';
-        $autor = 'autor';
+        $data_inicio = 'data_inicio';
+        $data_fim = 'data_fim';
+        $opiniao_leitor = 'opiniao_leitor';
         $classificacao = 'classificacao';
-        $paginas = 'paginas';
-        $data_publicacao = 'data_publicacao';
+        $fk_leitor = 'fk_leitor';
+        $fk_livro = 'fk_livro';
         /*TODO-1: Adicione uma variavel para cada coluna */
 
-
         $sql =
-            'SELECT ' . $titulo .
-            '     , ' . $autor .
-            '     , ' . $classificacao .
-            '     , ' . $paginas.
-            '     , ' . $data_publicacao.
+            'SELECT leitor.nome ' . $fk_leitor.
+            '     , livro.titulo ' . $fk_livro .
+            '     , ' . $data_inicio .
+            '     , ' . $data_fim .
+            '     , ' . $opiniao_leitor .
+            '     , leitura.' . $classificacao .
             /*TODO-2: Adicione cada variavel a consulta abaixo */
-            '  FROM livro';
+            '  FROM leitura
+               INNER JOIN leitor ON id_leitor = leitura.fk_leitor
+               INNER JOIN livro ON id_livro = leitura.fk_livro;';
 
         $resultado = mysqli_query($conexao, $sql);
         if (!$resultado) {
@@ -49,11 +51,12 @@
         $cabecalho =
             '<table style="width:100%;">' .
             '    <tr align="left">' .
-            '        <th>' . $titulo . '</th>' .
-            '        <th>' . $autor . '</th>' .
+            '        <th>' . $fk_leitor . '</th>' .
+            '        <th>' . $fk_livro . '</th>' .
+            '        <th>' . $data_inicio . '</th>' .
+            '        <th>' . $data_fim . '</th>' .
             '        <th>' . $classificacao . '</th>' .
-            '        <th>' . $paginas . '</th>' .
-            '        <th>' . $data_publicacao. '</th>' .
+            '        <th>' . $opiniao_leitor . '</th>' .
             '    </tr>';
 
         echo $cabecalho;
@@ -63,11 +66,12 @@
             while ($registro = mysqli_fetch_assoc($resultado)) {
                 echo '<tr>';
                     /* TODO-4: Adicione a tabela os novos registros. */
-                echo '<td>' . $registro[$titulo] . '</td>' .
-                    '<td>' . $registro[$autor] . '</td>' .
+                echo '<td>' . $registro[$fk_leitor] . '</td>' .
+                    '<td>' . $registro[$fk_livro] . '</td>' .
+                    '<td>' . $registro[$data_inicio] . '</td>' .
+                    '<td>' . $registro[$data_fim] . '</td>' .
                     '<td>' . $registro[$classificacao] . '</td>' .
-                    '<td>' . $registro[$paginas] . '</td>' .
-                    '<td>' . $registro[$data_publicacao] . '</td>';
+                    '<td>' . $registro[$opiniao_leitor] . '</td>';
                 echo '</tr>';
             }
             echo '</table>';
