@@ -46,9 +46,36 @@ CREATE TABLE amizade (
   CONSTRAINT fk_amizade_leitor2 FOREIGN KEY(fk_leitor2) REFERENCES leitor(id_leitor)
 );
 
+CREATE TABLE biblioteca (
+  id_biblioteca BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  fk_leitor BIGINT,
+  biblioteca_nome VARCHAR(100),
+  biblioteca_tema VARCHAR(100),
+  CONSTRAINT fk_biblioteca_leitor FOREIGN KEY(fk_leitor) REFERENCES leitor(id_leitor)
+);
+
+CREATE TABLE biblioteca_tem_livro (
+  id_biblioteca_livro BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  fk_biblioteca BIGINT,
+  fk_livro BIGINT,
+  CONSTRAINT fk_biblioteca_livro FOREIGN KEY(fk_livro) REFERENCES livro(id_livro)
+);
+
 
 
 /*INSERT*/
+INSERT INTO biblioteca (fk_leitor, biblioteca_nome, biblioteca_tema)
+VALUES
+(1, 'A Gioteca, a bibliteca do Gio', 'Melhor um livro na mão que dois no chão'),
+(1, 'AGIOTECA 2.0', 'A biblioteca dos agiotas'),
+(3, 'Minha Biblioteca', 'Livros legais');
+
+INSERT INTO biblioteca_tem_livro (fk_biblioteca, fk_livro)
+VALUES
+(1, 1), (1, 2), (1, 3),
+(2, 1), (2, 1), (2, 3),
+(3, 1), (3, 2); 
+
 INSERT INTO autor (autor_nome, data_nascimento)
 VALUES
 ('Platão', '2000-01-01'),
