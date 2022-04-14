@@ -20,13 +20,13 @@
 
         $conexao = RetornaConexao();
 
-        $fk_leitor1 = 'fk_leitor1';
-        $fk_leitor2 = 'fk_leitor2';
+        $fk_leitor1 = 'leitor_1';
+        $fk_leitor2 = 'leitor_2';
         /*TODO-1: Adicione uma variavel para cada coluna */
 
         $sql =
-            'SELECT leitor1.nome ' . $fk_leitor1 .
-            '     , leitor2.nome ' . $fk_leitor2 .
+            'SELECT leitor1.leitor_nome ' . $fk_leitor1 .
+            '     , leitor2.leitor_nome ' . $fk_leitor2 .
             /*TODO-2: Adicione cada variavel a consulta abaixo */
             '  FROM amizade 
                INNER JOIN leitor leitor1 ON leitor1.id_leitor = amizade.fk_leitor1

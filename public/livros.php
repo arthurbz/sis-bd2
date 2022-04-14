@@ -23,7 +23,7 @@
 
         $titulo = 'titulo';
         $autor = 'autor';
-        $classificacao = 'classificacao';
+        $tema = 'tema';
         $paginas = 'paginas';
         $data_publicacao = 'data_publicacao';
         /*TODO-1: Adicione uma variavel para cada coluna */
@@ -31,12 +31,13 @@
 
         $sql =
             'SELECT ' . $titulo .
-            '     , ' . $autor .
-            '     , ' . $classificacao .
+            '     , autor.autor_nome ' . $autor .
+            '     , ' . $tema .
             '     , ' . $paginas.
             '     , ' . $data_publicacao.
             /*TODO-2: Adicione cada variavel a consulta abaixo */
-            '  FROM livro';
+            '  FROM livro
+               INNER JOIN autor ON id_autor = fk_autor';
 
         $resultado = mysqli_query($conexao, $sql);
         if (!$resultado) {
@@ -51,7 +52,7 @@
             '    <tr align="left">' .
             '        <th>' . $titulo . '</th>' .
             '        <th>' . $autor . '</th>' .
-            '        <th>' . $classificacao . '</th>' .
+            '        <th>' . $tema . '</th>' .
             '        <th>' . $paginas . '</th>' .
             '        <th>' . $data_publicacao. '</th>' .
             '    </tr>';
@@ -65,7 +66,7 @@
                     /* TODO-4: Adicione a tabela os novos registros. */
                 echo '<td>' . $registro[$titulo] . '</td>' .
                     '<td>' . $registro[$autor] . '</td>' .
-                    '<td>' . $registro[$classificacao] . '</td>' .
+                    '<td>' . $registro[$tema] . '</td>' .
                     '<td>' . $registro[$paginas] . '</td>' .
                     '<td>' . $registro[$data_publicacao] . '</td>';
                 echo '</tr>';

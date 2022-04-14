@@ -20,13 +20,13 @@
 
         $conexao = RetornaConexao();
 
-        $nome = 'nome';
+        $leitor_nome = 'leitor_nome';
         $data_nascimento = 'data_nascimento';
         $sexo = 'sexo';
         /*TODO-1: Adicione uma variavel para cada coluna */
 
         $sql =
-            'SELECT ' . $nome.
+            'SELECT ' . $leitor_nome.
             '     , ' . $data_nascimento.
             '     , ' . $sexo.
             /*TODO-2: Adicione cada variavel a consulta abaixo */
@@ -43,7 +43,7 @@
         $cabecalho =
             '<table style="width:100%;">' .
             '    <tr align="left">' .
-            '        <th>' . $nome. '</th>' .
+            '        <th>' . $leitor_nome. '</th>' .
             '        <th>' . $data_nascimento. '</th>' .
             '        <th>' . $sexo. '</th>' .
             '    </tr>';
@@ -55,7 +55,7 @@
             while ($registro = mysqli_fetch_assoc($resultado)) {
                 echo '<tr>';
                     /* TODO-4: Adicione a tabela os novos registros. */
-                echo '<td>' . $registro[$nome] . '</td>' .
+                echo '<td>' . $registro[$leitor_nome] . '</td>' .
                     '<td>' . $registro[$data_nascimento] . '</td>' .
                     '<td>' . $registro[$sexo] . '</td>';
                 echo '</tr>';

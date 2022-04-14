@@ -24,12 +24,12 @@
         $data_fim = 'data_fim';
         $opiniao_leitor = 'opiniao_leitor';
         $classificacao = 'classificacao';
-        $fk_leitor = 'fk_leitor';
-        $fk_livro = 'fk_livro';
+        $fk_leitor = 'leitor';
+        $fk_livro = 'livro';
         /*TODO-1: Adicione uma variavel para cada coluna */
 
         $sql =
-            'SELECT leitor.nome ' . $fk_leitor.
+            'SELECT leitor.leitor_nome ' . $fk_leitor.
             '     , livro.titulo ' . $fk_livro .
             '     , ' . $data_inicio .
             '     , ' . $data_fim .
