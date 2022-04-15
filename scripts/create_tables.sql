@@ -61,9 +61,25 @@ CREATE TABLE biblioteca_tem_livro (
   CONSTRAINT fk_biblioteca_livro FOREIGN KEY(fk_livro) REFERENCES livro(id_livro)
 );
 
-
+CREATE TABLE leitor_tem_livro (
+  fk_leitor BIGINT NOT NULL,
+  fk_livro BIGINT NOT NULL,
+  quantidade INT,
+  PRIMARY KEY (fk_leitor, fk_livro),
+  CONSTRAINT fk_ltl_leitor FOREIGN KEY(fk_leitor) REFERENCES leitor(id_leitor),
+  CONSTRAINT fk_ltl_livro FOREIGN KEY(fk_livro) REFERENCES livro(id_livro),
+  CONSTRAINT check_quantidade CHECK (quantidade > 0)
+);
 
 /*INSERT*/
+INSERT INTO leitor_tem_livro (fk_leitor, fk_livro, quantidade)
+VALUES
+(1, 1, 2), (1, 3, 1),
+(2, 4, 3),
+(3, 2, 1),
+(4, 1, 1), (4, 2, 1), (4, 4, 1), (4, 3, 1),
+(5, 2, 2), (5, 3, 1);
+
 INSERT INTO biblioteca (fk_leitor, biblioteca_nome, biblioteca_tema)
 VALUES
 (1, 'A Gioteca, a bibliteca do Gio', 'Melhor um livro na mão que dois no chão'),
@@ -111,22 +127,8 @@ VALUES
 
 INSERT INTO amizade (fk_leitor1, fk_leitor2)
 VALUES
-(1, 2),
-(1, 3),
-(1, 4),
-(2, 1),
-(2, 5),
-(3, 1),
-(3, 2),
-(4, 1),
-(4, 3),
-(4, 5),
-(5, 1),
-(5, 3),
-(5, 4);
-
-SELECT
-	*
-FROM leitura
-INNER JOIN livro ON id_livro = leitura.fk_livro
-INNER JOIN leitor ON id_leitor = leitura.fk_leitor;
+(1, 2), (1, 3), (1, 4),
+(2, 1), (2, 5),
+(3, 1), (3, 2),
+(4, 1), (4, 3), (4, 5),
+(5, 1), (5, 3), (5, 4);
