@@ -30,9 +30,11 @@ Representa o livro em sí. Possui relação com a tabela Autor, sendo a cardinal
 
 <h2> Stored Objects </h2>
 
+<!-- View com Group By --->
 <h3> View com Group By </h3>
 <p> Criação: </p>
-<pre>
+
+```
 CREATE OR REPLACE VIEW db_app_db2.livros_em_bibliotecas AS  
 SELECT
 	leitor_nome dono,
@@ -45,48 +47,63 @@ FROM biblioteca_tem_livro bl
   INNER JOIN livro lv ON lv.id_livro = bl.fk_livro
 GROUP BY dono, biblioteca_nome, biblioteca_tema
 ORDER BY dono, biblioteca_nome;
-</pre>
-<p> Exemplo de uso: </p>
-<pre>
-SELECT * FROM db_app_db2.livros_em_bibliotecas;
-</pre>
+```
 
+<p> Exemplo de uso: </p>
+
+```
+SELECT * FROM db_app_db2.livros_em_bibliotecas;
+```
+<!-- /View com Group By --->
+
+<!-- Function --->
 <h3> Function </h3>
 <p> Criação: </p>
-<pre>
 
-</pre>
+```
+```
+
 <p> Exemplo de uso: </p>
-<pre>
 
-</pre>
+```
+```
+<!-- /Function --->
 
+<!-- /Procedure --->
 <h3> Procedure </h3>
 <p> Criação: </p>
-<pre>
 
-</pre>
+```
+```
+
 <p> Exemplo de uso: </p>
-<pre>
 
-</pre>
+```
+```
+<!-- /Procedure --->
 
+<!-- /Trigger --->
 <h3> Trigger </h3>
 <p> Criação: </p>
-<pre>
 
-</pre>
+```
+```
+
 <p> Exemplo de uso: </p>
-<pre>
 
-</pre>
+```
+```
+<!-- /Trigger --->
 
+<!-- /Event --->
 <h3> Event </h3>
 <p> Criação: </p>
-<pre>
 
-</pre>
+```
+```
+
 <p> Exemplo de uso: </p>
-<pre>
 
-</pre>
+```
+```
+<!-- /Event --->
