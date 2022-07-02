@@ -14,15 +14,19 @@ Tabela que representa o autor de um livro. Cardinalidade de 1 ... n com a tabela
 Uma Biblioteca no contexto deste projeto, é um acumulado de diversos livros que um leitor possui. Também possui cardinalidade 1 ... n com a tabela Leitor, pois um leitor pode ter uma ou muitas bibliotecas.
 
 - <b> Biblioteca tem livros </b> <br>
+Tabela que representa a relação n ... n de livros e bibliotecas. Um determinado livro pode estar em uma biblioteca e uma biblioteca pode ter muitos livros.
 
 - <b> Leitor </b> <br>
+Tabela que representa os leitores (usuários).
 
 - <b> Leitor tem livro </b> <br>
+Representa a relação n ... n entre livros e leitores. Um leitor pode ter muitos livros e um livro (levando em consideração a ideia de um livro e não o livro físico em sí). Por exemplo, em nosso banco o livro "Meditations - Marcus Aurelius" será o mesmo para todos os leitores, por mais que os leitores tenham diferentes cópias do mesmo.
 
 - <b> Leitura </b> <br>
+Tabela que registra todas as leituras de um determinado leitor e permite que ele insira sua opinião sobre o livro.
 
 - <b> Livro </b> <br>
-
+Representa o livro em sí. Possui relação com a tabela Autor, sendo a cardinalidade n ... 1, ou seja, um livro possui um autor e o autor possui v
 
 <h2> Stored Objects </h2>
 
