@@ -94,11 +94,23 @@ FROM livro;
 <p> Criação: </p>
 
 ```
+DELIMITER //
+
+CREATE PROCEDURE excluir_autores_sem_livros()
+BEGIN
+	DELETE autor
+	FROM autor
+	LEFT JOIN livro ON fk_autor = id_autor
+	WHERE id_livro IS NULL;
+END //
+
+DELIMITER ;
 ```
 
 <p> Exemplo de uso: </p>
 
 ```
+CALL excluir_autores_sem_livros();
 ```
 <!-- /Procedure --->
 
