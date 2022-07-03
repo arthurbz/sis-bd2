@@ -32,6 +32,7 @@ Representa o livro em sí. Possui relação com a tabela Autor, sendo a cardinal
 
 <!-- View com Group By --->
 <h3> View com Group By </h3>
+<p> Objetivo: Exibir todas as bibliotecas, agrupando seus livros. </p>
 <p> Criação: </p>
 
 ```
@@ -58,10 +59,11 @@ SELECT * FROM db_app_db2.livros_em_bibliotecas;
 
 <!-- Function --->
 <h3> Function </h3>
+<p> Objetivo: Calcular quantas vezes um livro já foi lido. </p>
 <p> Criação: </p>
 
 ```
-DELIMITER $$
+DELIMITER //
 
 CREATE FUNCTION quantidade_leituras (p_id_livro BIGINT)
 RETURNS INT
@@ -74,7 +76,7 @@ BEGIN
 	WHERE id_livro = p_id_livro);
 
 	RETURN @leituras;
-END $$
+END //
 
 DELIMITER ;
 ```
@@ -91,9 +93,12 @@ FROM livro;
 
 <!-- /Procedure --->
 <h3> Procedure </h3>
+<p> Objetivo: Excluir todos os autores que não possuam livros. </p>
 <p> Criação: </p>
 
 ```
+DROP PROCEDURE IF EXISTS excluir_autores_sem_livros;
+
 DELIMITER //
 
 CREATE PROCEDURE excluir_autores_sem_livros()
@@ -116,6 +121,7 @@ CALL excluir_autores_sem_livros();
 
 <!-- /Trigger --->
 <h3> Trigger </h3>
+<p> Objetivo: Não permitir que leitores insiram números em seu nome. </p>
 <p> Criação: </p>
 
 ```
@@ -144,13 +150,23 @@ INSERT INTO leitor (leitor_nome, data_nascimento, sexo) VALUES
 
 <!-- /Event --->
 <h3> Event </h3>
+<p> Objetivo: Excluir todos os autores sem livros a cada 1 semana. </p>
 <p> Criação: </p>
 
 ```
+SET GLOBAL event_scheduler = ON;
+SHOW ProcessList;
+
+DROP EVENT IF EXISTS db_app_db2.limpar_autores;
+CREATE EVENT db_app_db2.limpar_autores
+ON SCHEDULE EVERY 1 HOUR
+ON COMPLETION PRESERVE
+DO CALL excluir_autores_sem_livros();
 ```
 
 <p> Exemplo de uso: </p>
 
 ```
+SHOW events;
 ```
 <!-- /Event --->
