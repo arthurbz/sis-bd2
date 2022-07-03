@@ -38,13 +38,13 @@ Representa o livro em sí. Possui relação com a tabela Autor, sendo a cardinal
 CREATE OR REPLACE VIEW db_app_db2.livros_em_bibliotecas AS  
 SELECT
 	leitor_nome dono,
-    	biblioteca_nome,
+	biblioteca_nome,
 	biblioteca_tema,
    	GROUP_CONCAT(DISTINCT lv.titulo SEPARATOR '; ') livros 
 FROM biblioteca_tem_livro bl 
-  INNER JOIN biblioteca b ON b.id_biblioteca = bl.fk_biblioteca 
-  INNER JOIN leitor l ON l.id_leitor = b.fk_leitor 
-  INNER JOIN livro lv ON lv.id_livro = bl.fk_livro
+	INNER JOIN biblioteca b ON b.id_biblioteca = bl.fk_biblioteca 
+	INNER JOIN leitor l ON l.id_leitor = b.fk_leitor 
+	INNER JOIN livro lv ON lv.id_livro = bl.fk_livro
 GROUP BY dono, biblioteca_nome, biblioteca_tema
 ORDER BY dono, biblioteca_nome;
 ```
@@ -61,11 +61,31 @@ SELECT * FROM db_app_db2.livros_em_bibliotecas;
 <p> Criação: </p>
 
 ```
+DELIMITER $$
+
+CREATE FUNCTION quantidade_leituras (p_id_livro BIGINT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+	SET @leituras :=
+	(SELECT
+		COUNT(*)
+	FROM leitura
+	WHERE id_livro = p_id_livro);
+
+	RETURN @leituras;
+END $$
+
+DELIMITER ;
 ```
 
 <p> Exemplo de uso: </p>
 
 ```
+SELECT
+	*,
+	quantidade_leituras(id_livro)
+FROM livro;
 ```
 <!-- /Function --->
 
