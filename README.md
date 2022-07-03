@@ -28,6 +28,9 @@ Tabela que registra todas as leituras de um determinado leitor e permite que ele
 - <b> Livro </b> <br>
 Representa o livro em sí. Possui relação com a tabela Autor, sendo a cardinalidade n ... 1, ou seja, um livro possui um autor e o autor possui vários livros.
 
+<h2> Diagrama ER </h2>
+<img src="https://raw.githubusercontent.com/arthurbz/sis-bd2/main/scripts/UML.jpg" >
+
 <h2> Stored Objects </h2>
 
 <!-- View com Group By --->
@@ -145,6 +148,15 @@ DELIMITER ;
 INSERT INTO leitor (leitor_nome, data_nascimento, sexo) VALUES
 ('Algum 123 Teste 888899912301 Sem Números', '2000-10-08', 'M'),
 ('Teste1', '2000-05-10', 'M');
+
+SELECT * FROM leitor;
+/*
+                 ** Resultado **
+id_leitor|leitor_nome                 |data_nascimento|sexo|
+---------+----------------------------+---------------+----+
+        1|Algum  Teste  Sem Números   |     2000-10-08|M   |
+        2|Teste                       |     2000-05-10|M   |
+*/
 ```
 <!-- /Trigger --->
 
