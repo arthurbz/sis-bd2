@@ -119,11 +119,26 @@ CALL excluir_autores_sem_livros();
 <p> Criação: </p>
 
 ```
+DROP TRIGGER IF EXISTS trigger_ajusta_nome;
+
+DELIMITER //
+
+CREATE TRIGGER trigger_ajusta_nome BEFORE INSERT
+ON leitor
+FOR EACH ROW
+BEGIN
+	SET NEW.leitor_nome = REGEXP_REPLACE(NEW.leitor_nome, "[0-9]", "");
+END //
+
+DELIMITER ;
 ```
 
 <p> Exemplo de uso: </p>
 
 ```
+INSERT INTO leitor (leitor_nome, data_nascimento, sexo) VALUES
+('Algum 123 Teste 888899912301 Sem Números', '2000-10-08', 'M'),
+('Teste1', '2000-05-10', 'M');
 ```
 <!-- /Trigger --->
 
